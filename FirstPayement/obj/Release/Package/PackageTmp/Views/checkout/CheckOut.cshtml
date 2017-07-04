@@ -1,0 +1,64 @@
+﻿
+@*@{
+    ViewBag.Title = "CheckOut";
+}
+
+
+<h2>CheckOut</h2>
+
+Pay @ViewBag.Amount?
+
+@{string pay = "http://localhost:8080/Checkout/PaymentCompleted?token=" + ViewBag.token;
+    string cancel = "http://localhost:8080/Checkout/PaymentCancelled?token=" + ViewBag.token;
+}
+
+<a href="@pay">Pay now</a>
+<br>
+<a href= "@cancel">Cancel</a>*@
+
+@*@{
+        ViewBag.Title = "CheckOut";
+    }
+
+
+    <h2>CheckOut</h2>
+
+    Pay @ViewBag.Amount?
+
+    @{string pay = "http://localhost:8080/Checkout/PaymentCompleted?token=" + ViewBag.token;
+        string cancel = "http://localhost:8080/Checkout/PaymentCancelled?token=" + ViewBag.token;
+    }
+
+    <a href="@pay">Pay now</a>
+    <br>
+    <a href= "@cancel">Cancel</a>*@
+
+@using  FirstPayement;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Indexs</h2>
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="paypal">
+
+    <input type="hidden" name="cmd" value="_xclick">
+
+    <input type="hidden" name="business" value="testpineappleshop@shop.com">
+    <input type="hidden" name="custom" value="@ViewBag.token">
+
+    <input type="hidden" name="amount" value="100">
+    <input type="hidden" name="shopping_url"
+           value="http://www.yourwebsite.com/shoppingpage.html">
+
+    <input type="hidden" name="return" value="http://www.yourwebsite.com/success.html">
+    <input type="hidden" name="cancel_return" value="@Const.BaseURl/Checkout/PaymentCancelled?token=@ViewBag.token">
+
+    <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but22.gif" border="0"
+           name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+   
+</form>
+
+
+
+@*@ViewBag.responseContent*@
